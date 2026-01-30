@@ -1,4 +1,4 @@
-# 127. Word Ladder (Bidirectional BFS)
+
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         wordSet = set(wordList)
