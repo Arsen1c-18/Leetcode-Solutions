@@ -3,36 +3,29 @@ class Solution {
 public:
     void reorderList(ListNode* head) {
         if (!head || !head->next) return;
-
         ListNode *slow = head, *fast = head;
         while (fast->next && fast->next->next) {
             slow = slow->next;
             fast = fast->next->next;
         }
-
         ListNode* prev = nullptr;
         ListNode* curr = slow->next;
-        slow->next = nullptr;
-
         while (curr) {
-            ListNode* nxt = curr->next;
+            ListNode* next = curr->next;
             curr->next = prev;
             prev = curr;
-            curr = nxt;
+            curr = next;
         }
-
-        ListNode* l1 = head;
-        ListNode* l2 = prev;
-
-        while (l2) {
-            ListNode* n1 = l1->next;
-            ListNode* n2 = l2->next;
-
-            l1->next = l2;
-            l2->next = n1;
-
-            l1 = n1;
-            l2 = n2;
+        slow->next = nullptr;
+        ListNode* first = head;
+        ListNode* second = prev;
+        while (second) {
+            ListNode* t1 = first->next;
+            ListNode* t2 = second->next;
+            first->next = second;
+            second->next = t1;
+            first = t1;
+            second = t2;
         }
     }
 };
